@@ -1,5 +1,4 @@
 // ./react-redux-client/src/actions/tempoActions.js
-
 const apiUrl = "/api/";
 
 export const toggleAddBook = () => {
@@ -13,12 +12,11 @@ export const addNewTempo = (tempo) => {console.log(tempo)
     dispatch(addNewTempoRequest(tempo));
     return fetch(apiUrl, {
       method:'post',
-      //  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: tempo,
     }).then(response => {
       if(response.ok){
-        response.json().then(data => {
-          dispatch(addNewTempoRequestSuccess(data.tempo[0], data.message))
+        response.json().then(data => {console.log(data.tempo);
+          dispatch(addNewTempoRequestSuccess(data.tempo, data.message))
         })
       }
       else{
@@ -30,10 +28,29 @@ export const addNewTempo = (tempo) => {console.log(tempo)
   }
 }
 
-export const deleteTempo = (tempo) => {
+export const addNewTempoRequest = (tempo) => {
+  return {
+    type: 'ADD_NEW_TEMPO_REQUEST',
+    tempo
+  }
 }
 
-export const editTempo = (tempo) => {
+export const addNewTempoRequestSuccess = (tempo,message) => {
+  return {
+    type: 'ADD_NEW_TEMPO_REQUEST_SUCCESS',
+    tempo:tempo,
+    message:message
+  }
+}
+
+export const addNewTempoRequestFailed = (error) => {
+  return {
+    type: 'ADD_NEW_TEMPO_REQUEST_FAILED',
+    error
+  }
+}
+
+export const deleteTempo = (tempo) => {
 }
 
 //Async action
@@ -43,8 +60,7 @@ export const fetchTempos = () => {
   return (dispatch) => {
     dispatch(fetchTemposRequest());
     // Returns a promise
-    return fetch(apiUrl)
-    .then(response => {
+    return fetch(apiUrl).then(response => {
       if(response.ok){
         response.json().then(data => {
           dispatch(fetchTemposSuccess(data.tempos,data.message));
@@ -86,8 +102,8 @@ export const fetchTempoById = (tempoId) => {
   return (dispatch) => {
     dispatch(fetchTempoRequest());
     // Returns a promise
-    return fetch(apiUrl + tempoId)
-    .then(response => {console.log(response)
+    return fetch(apiUrl + tempoId).then(response => {
+      console.log(response)
       if(response.ok){
         response.json().then(data => {
           dispatch(fetchTempoSuccess(data.tempo[0], data.message));
@@ -95,7 +111,7 @@ export const fetchTempoById = (tempoId) => {
       }
       else{
         response.json().then(error => {
-          dispatch(fetchTempoFailed(error));
+         dispatch(fetchTempoFailed(error));
         })
       }
     })
@@ -107,6 +123,7 @@ export const fetchTempoRequest = () => {
     type:'FETCH_TEMPO_REQUEST'
   }
 }
+
 //Sync action
 export const fetchTempoSuccess = (tempo,message) => {
   return {
@@ -116,28 +133,66 @@ export const fetchTempoSuccess = (tempo,message) => {
     receivedAt: Date.now
   }
 }
+
 export const fetchTempoFailed = (error) => {
   return {
     type:'FETCH_TEMPO_FAILED',
     error
   }
 }
-export const addNewTempoRequest = (tempo) => {
+
+export const showEditModal = (tempoToEdit) => {
   return {
-    type: 'ADD_NEW_TEMPO_REQUEST',
-    tempo
+    type:'SHOW_EDIT_MODAL',
+    tempo:tempoToEdit
   }
 }
-export const addNewTempoRequestSuccess = (tempo,message) => {
+
+export const hideEditModal = () => {
   return {
-    type: 'ADD_NEW_TEMPO_REQUEST_SUCCESS',
+    type:'HIDE_EDIT_MODAL'
+  }
+}
+
+export const editTempo = (tempo) => {
+  return (dispatch) => {
+    dispatch(editTempoRequest(tempo));
+    return fetch(apiUrl, {
+      method:'put',
+      body:tempo
+    }).then(response => {
+      if(response.ok){
+        response.json().then(data => {
+          dispatch(editTempoSuccess(data.tempo,data.message));
+        })
+      }
+      else{
+        response.json().then(error => {
+          dispatch(editTempoFailed(error));
+        })
+      }
+    })
+  }
+}
+
+export const editTempoRequest = (tempo) => {
+   return {
+     type:'EDIT_TEMPO_REQUEST',
+     tempo
+   }
+}
+
+export const editTempoSuccess = (tempo,message) => {
+  return {
+    type:'EDIT_TEMPO_SUCCESS',
     tempo:tempo,
     message:message
   }
 }
-export const addNewTempoRequestFailed = (error) => {
+
+export const editTempoFailed = (error) => {
   return {
-    type: 'ADD_NEW_TEMPO_REQUEST_FAILED',
+    type:'EDIT_TEMPO_FAILED',
     error
   }
 }

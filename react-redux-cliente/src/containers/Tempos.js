@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import * as tempoActions from '../actions/tempoActions';
 import Tempos from '../components/Tempos';
+
 // map state from store to props
 const mapStateToProps = (state,ownProps) => {
   return {
@@ -15,7 +16,9 @@ const mapDispatchToProps = (dispatch) => {
     //you can now say this.props.mappedAppActions
     fetchTempos: () => dispatch(tempoActions.fetchTempos()),
     mappedDeleteTempo: tempoToDelete => dispatch(tempoActions.deleteTempo(tempoToDelete)),
-    mappedEditTempo: tempoToEdit => dispatch(tempoActions.editTempo(tempoToEdit))
+    mappedEditTempo: tempoToEdit => dispatch(tempoActions.editTempo(tempoToEdit)),
+    mappedshowEditModal: tempoToEdit => dispatch(tempoActions.showEditModal(tempoToEdit)),
+    mappedhideEditModal: () => dispatch(tempoActions.hideEditModal())
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Tempos);
