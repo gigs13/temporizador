@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+}
+
+.centerAlign{text-align: center;vertical-align: middle;}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.lastUpdatedDiv{position:relative;height:auto; width:auto; background:#fad400;margin: 20px auto;}
+.errorText{
+  background-color: red;
+  color:white;
+  padding: 2px;
+}
+
+.successText{
+  background-color: green;
+  color:white;
+  padding: 2px;
+}
+ a{
+  text-decoration: none;
+ }
+
+ .pagination_div{
+   text-align: center;
+   margin-top: 10%;
+ }
+
+ .pgntion-ui{
+   list-style: none;
+	padding: 2px;
+
+ }
+ .pgntion-ui li {
+   display: inline-block;
+   transition: .15s ease-in;
+		cursor: pointer;
+ }
+ .pagination-number {
+		font-family: "Roboto", sans-serif;
+		font-size: 14px;
+		text-align: center;
+		padding: 8px 0;
+    color:white;
+  }
+
+.activePaginationNumber{color: white;}
+.paginationNumber{color: rgba(33,33,33 ,1) !important;}
+
+li.autoCompleteItem{color:#555555;}
+
+li.autoCompleteItem:hover{
+  background-color: #0082EB;
+  color: white
+}

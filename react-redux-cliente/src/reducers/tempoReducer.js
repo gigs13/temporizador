@@ -90,6 +90,48 @@ export  const tempoReducer = (currentState = INITIAL_STATE, action) => {
       showEditModal: false,
       tempoToEdit: null,
     }
+    case 'ADD_NEW_TODO_REQUEST':
+    return {
+      ...currentState,
+      tempos:currentState.tempos,
+      tempo:null,
+      isFetching: true,
+      error: null,
+      successMsg:null,
+      showDeleteModal: false,
+      tempoToDelete: null,
+      showEditModal: false,
+      tempoToEdit: null,
+      newTempo: action.tempo
+    }
+    case 'ADD_NEW_TODO_REQUEST_FAILED':
+    return {
+      ...currentState,
+      tempos:currentState.tempos,
+      tempo:null,
+      isFetching: true,
+      error: action.error,
+      successMsg:null,
+      showDeleteModal: false,
+      tempoToDelete: null,
+      showEditModal: false,
+      tempoToEdit: null,
+      newTempo: null
+    }
+    case 'ADD_NEW_TODO_REQUEST_SUCCESS':
+    return {
+      ...currentState,
+      tempos:[...currentState.tempos, action.tempo],
+      tempo:null,
+      isFetching: false,
+      error: null,
+      successMsg:action.message,
+      showDeleteModal: false,
+      tempoToDelete: null,
+      showEditModal: false,
+      tempoToEdit: null,
+      newTempo: action.tempo
+    }
     default:
       return currentState;
   }

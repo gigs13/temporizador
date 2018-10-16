@@ -35,18 +35,23 @@ render(){
       }
       {tempos && tempos.length > 0 && !tempoState.isFetching &&
       <table className="table booksTable">
-      <thead>
-       <tr><th>Temporizador</th><th className="textCenter">Editar</th><th className="textCenter">Eliminar</th><th className="textCenter">Ver</th></tr>
-      </thead>
-      <tbody>
-        {tempos.map((tempo,i) => <tr key={i}>
-        <td>{tempo.tempoText}</td>
-         <td className="textCenter"><Button onClick={() => this.showEditModal(tempo)} bsStyle="info" bsSize="xsmall"><Glyphicon glyph="pencil" /></Button></td>
-         <td className="textCenter"><Button onClick={() => this.showDeleteModal(tempo)} bsStyle="danger" bsSize="xsmall"><Glyphicon glyph="trash" /></Button></td>
-         <td className="textCenter"><Link to={`/${tempo._id}`}>Detalles</Link> </td>
-         </tr> )
-      }
-      </tbody>
+        <thead>
+         <tr>
+          <th>Temporizador</th>
+          <th className="textCenter">Editar</th>
+          <th className="textCenter">Eliminar</th>
+          <th className="textCenter">Ver</th>
+         </tr>
+        </thead>
+        <tbody>
+          {tempos.map((tempo,i) => <tr key={i}>
+          <td>{tempo.tempoText}</td>
+           <td className="textCenter"><Button onClick={() => this.showEditModal(tempo)} bsStyle="info" bsSize="xsmall"><Glyphicon glyph="pencil" /></Button></td>
+           <td className="textCenter"><Button onClick={() => this.showDeleteModal(tempo)} bsStyle="danger" bsSize="xsmall"><Glyphicon glyph="trash" /></Button></td>
+           <td className="textCenter"><Link to={`/${tempo._id}`}>Detalles</Link> </td>
+           </tr> )
+          }
+        </tbody>
       </table>
     }
       </div>
